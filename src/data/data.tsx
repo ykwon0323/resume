@@ -108,7 +108,7 @@ export const heroData: Hero = {
 export const aboutData: About = {
   profileImageSrc: profilepic,
   description: `I studied other languages besides the ones I officially experienced in my personal time.
-  Although programming languages are dierent, most languages have features that are essential at this time.
+  Although programming languages are different, most languages have features that are essential at this time.
   Therefore, it is not too dicult to do a project in any programming language other than the language I have
   experienced.`,
   aboutItems: [
