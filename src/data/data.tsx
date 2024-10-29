@@ -105,6 +105,9 @@ export const heroData: Hero = {
 /**
  * About section
  */
+
+let today = new Date();
+
 export const aboutData: About = {
   profileImageSrc: profilepic,
   description: `I studied other languages besides the ones I officially experienced in my personal time.
@@ -113,7 +116,7 @@ export const aboutData: About = {
   experienced.`,
   aboutItems: [
     {label: 'Location', text: 'Nantes, France', Icon: MapIcon},
-    {label: 'Age', text: '27', Icon: CalendarIcon},
+    {label: 'Age', text: (today.getFullYear()-1995)+'', Icon: CalendarIcon},
     {label: 'Nationality', text: 'Republic of Korea', Icon: FlagIcon},
     {label: 'Interests', text: 'Startup, Data, Drawing Art', Icon: SparklesIcon},
     {label: 'Study', text: 'Choong-Am, High School', Icon: AcademicCapIcon},
