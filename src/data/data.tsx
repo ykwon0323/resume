@@ -81,10 +81,10 @@ export const heroData: Hero = {
       I mainly participated as a backend developer in Java-based projects,
        but I am not discriminating towards any type or language and can participate in projects of any kind.
       </p>
-      <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
+      {/* <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
       Currently, I am looking for a project to participate in while on a working holiday in the Nantes region of France.<br/>(22/12/30 ~ 23/12/30)<br/>
       I am looking for colleagues and companies to work with in France even after my working holiday is over.
-      </p>
+      </p> */}
     </>
   ),
   actions: [
