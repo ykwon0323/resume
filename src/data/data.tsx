@@ -73,13 +73,13 @@ export type SectionId = typeof SectionId[keyof typeof SectionId];
  */
 export const heroData: Hero = {
   imageSrc: heroImage,
-  name: `I'm Yong-kwon Jo.`,
+  name: `Je m'appelle Yong-kwon`,
   description: (
     <>
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
       <strong className="text-stone-100">Trustworthy, responsible developer.</strong> <br/>
-      I mainly participated as a backend developer in Java-based projects,
-       but I am not discriminating towards any type or language and can participate in projects of any kind.
+      Bonjour ! Je m'appelle Yong-kwon, et je suis développeur backend spécialisé en Java. Avec plus de 5 ans d'expérience professionnelle, <br/>
+      je suis passionné par le développement de logiciels et par la création de solutions efficaces et évolutives pour des projets de différentes envergures.
       </p>
       {/* <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
       Currently, I am looking for a project to participate in while on a working holiday in the Nantes region of France.<br/>(22/12/30 ~ 23/12/30)<br/>
@@ -89,7 +89,7 @@ export const heroData: Hero = {
   ),
   actions: [
     {
-      href: 'https://drive.google.com/file/d/1rYX4kGlzn5xGmyLpuyEpT6gsEJzNpHO-/view?usp=share_link',
+      href: 'https://drive.google.com/file/d/1nT5_Zm2Uq8-RH2y6xbHxY7nQluNv6P5K/view?usp=drive_link',
       text: 'Resume',
       primary: true,
       Icon: DownloadIcon,
@@ -110,10 +110,9 @@ let today = new Date();
 
 export const aboutData: About = {
   profileImageSrc: profilepic,
-  description: `I studied other languages besides the ones I officially experienced in my personal time.
-  Although programming languages are different, most languages have features that are essential at this time.
-  Therefore, it is not too dicult to do a project in any programming language other than the language I have
-  experienced.`,
+  description: `Bonjour ! Je m'appelle Yong-kwon, et je suis développeur backend spécialisé en Java. Avec plus de 5 ans d'expérience professionnelle, je suis passionné par le développement de logiciels et par la création de solutions efficaces et évolutives pour des projets de différentes envergures.
+Je maîtrise principalement le framework Spring pour implémenter des architectures microservices et développer des API RESTful. J'ai également de l'expérience dans la conception et l'optimisation de bases de données, tant relationnelles (SQL) que non relationnelles (NoSQL). Par ailleurs, je suis à l'aise avec le développement piloté par les tests (TDD) et le travail dans des environnements CI/CD.
+Curieux et toujours motivé pour apprendre et appliquer de nouvelles technologies, je mets un point d'honneur à collaborer avec les équipes afin de produire les meilleurs résultats. Dans cet univers en constante évolution qu'est le développement logiciel, je suis prêt à grandir avec vous. N'hésitez pas à me contacter pour toute opportunité !`,
   aboutItems: [
     {label: 'Location', text: 'Nantes, France', Icon: MapIcon},
     {label: 'Age', text: (today.getFullYear()-1995)+'', Icon: CalendarIcon},
