@@ -23,12 +23,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Install system dependencies
+      # Install system dependencies (using libssl3)
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.19_amd64.deb
-          sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2.19_amd64.deb || sudo apt-get install -f -y
+          sudo apt-get install -y libssl3
           sudo apt-get install -y libstdc++6
 
       # Set environment variables for SWC fallback
