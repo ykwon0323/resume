@@ -15,24 +15,29 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Build job
   build:
-    runs-on: ubuntu-20.04 # Use a compatible version for libssl1.1
+    runs-on: ubuntu-latest
     steps:
+      # Checkout the repository
       - name: Checkout
         uses: actions/checkout@v3
-        
+
+      # Install system dependencies
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          wget http://old-releases.ubuntu.com/ubuntu/pool/main/o/openssl1.1/libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb
-          sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb || sudo apt-get install -f -y
+          wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.19_amd64.deb
+          sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2.19_amd64.deb || sudo apt-get install -f -y
           sudo apt-get install -y libstdc++6
 
+      # Set environment variables for SWC fallback
       - name: Set environment variables for SWC fallback
         run: |
           echo "NEXT_IGNORE_SWCS_FAIL=1" >> $GITHUB_ENV
           echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
 
+      # Detect package manager (npm or yarn)
       - name: Detect package manager
         id: detect-package-manager
         run: |
@@ -51,20 +56,24 @@ jobs:
             exit 1
           fi
 
+      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
+      # Update Browserslist DB
       - name: Update Browserslist DB
         run: npx browserslist@latest --update-db
 
+      # Setup Pages
       - name: Setup Pages
         uses: actions/configure-pages@v3
         with:
           static_site_generator: next
 
+      # Restore cache for Next.js
       - name: Restore cache
         uses: actions/cache@v3
         with:
@@ -73,22 +82,28 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
+
+      # Install dependencies (npm or yarn)
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
+      # Build Next.js app
       - name: Build with Next.js
         env:
           NODE_ENV: production
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
 
+      # Export static HTML for Next.js
       - name: Static HTML export with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next export
 
+      # Upload artifact for deployment
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./out
 
+  # Deployment job
   deploy:
     environment:
       name: github-pages
@@ -96,6 +111,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
