@@ -24,13 +24,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget libssl1.1
-
-      - name: Download and install libssl1.1
-        run: |
-          wget http://old-releases.ubuntu.com/ubuntu/pool/main/o/openssl1.1/libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb
-          sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2.16_amd64.deb
-          sudo apt-get install -f
+          sudo apt-get install -y wget libssl3  # Installing the latest OpenSSL package
 
       - name: Set environment variables for SWC fallback
         run: |
@@ -50,7 +44,7 @@ jobs:
             echo "runner=npx --no-install" >> $GITHUB_OUTPUT
             exit 0
           else
-            echo "Unable to determine package manager"
+            echo "Unable to determine package manager. Ensure you have either yarn.lock or package.json in your repo."
             exit 1
           fi
 
