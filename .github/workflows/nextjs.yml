@@ -24,10 +24,12 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget libssl3  # Installing only OpenSSL 3.x
+          sudo apt-get install -y wget libssl3 libssl1.1  # Adding both versions for compatibility
+
       - name: Set environment variables for SWC fallback
         run: |
-          echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
+          echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV  # Ensuring the OpenSSL legacy provider is set
+
       - name: Detect package manager
         id: detect-package-manager
         run: |
@@ -45,6 +47,7 @@ jobs:
             echo "Unable to determine package manager. Ensure you have either yarn.lock or package.json in your repo."
             exit 1
           fi
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -67,6 +70,7 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
+
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
 
